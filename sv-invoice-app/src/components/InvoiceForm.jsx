@@ -103,6 +103,8 @@ const defaultInvoice = {
     bankName: "INDIAN BANK",
   },
   companyGST: "",
+  cgstRate: 6,
+  sgstRate: 6,
 };
 
 // Main Invoice Form
@@ -142,6 +144,12 @@ const InvoiceForm = () => {
     setInvoiceData({ ...invoiceData, items });
   };
 
+  const handleTaxRateChange = (field, value) =>
+    setInvoiceData((prev) => ({
+      ...prev,
+      [field]: parseFloat(value) || 0,
+    }));
+
   // Remove item row
   const removeItem = (index) => {
     const items = invoiceData.items.filter((_, idx) => idx !== index);
@@ -177,8 +185,8 @@ const InvoiceForm = () => {
       const fullRate = rate + paise;
       return sum + (parseFloat(item.qty) || 0) * fullRate;
     }, 0);
-    const cgst = subtotal * 0.06;
-    const sgst = subtotal * 0.06;
+    const cgst = subtotal * (invoiceData.cgstRate / 100);
+    const sgst = subtotal * (invoiceData.sgstRate / 100);
     return { subtotal, cgst, sgst, total: subtotal + cgst + sgst };
   })();
 
@@ -253,34 +261,34 @@ const InvoiceForm = () => {
             <div className="mt-1 company-address">
               <p className="font-medium mb-0.5">
                 <span className="print-only">
-                  #47 3rd cross Anotonio street 2<sup>nd</sup> stage macmillain
-                  area post
+                  #47 3rd cross shaneshwara nagar Kariobanahalli Veshwaneedam
+                  post
                 </span>
                 <textarea
                   rows={1}
                   className="w-full text-center border-none no-print resize-none text-sm"
                   placeholder="Company Address Line 1"
-                  defaultValue="#47 3rd cross Anotonio street 2nd stage macmillain area post"
+                  defaultValue="#47 3rd cross shaneshwara nagar Kariobanahalli Veshwaneedam post"
                 />
               </p>
               <p className="font-medium mb-0.5">
                 <span className="print-only">
-                  Bangalore -566591 mob: 9876567656
+                  Bangalore -560091 mob: 9786876878
                 </span>
                 <textarea
                   rows={1}
                   className="w-full text-center border-none no-print resize-none text-sm"
                   placeholder="Company Address Line 2"
-                  defaultValue="Bangalore -566591 mob: 9876567656"
+                  defaultValue="Bangalore -560091 mob: 9786876878"
                 />
               </p>
               <p className="font-medium mb-0">
-                <span className="print-only">Mail ID: agency@gmail.com</span>
+                <span className="print-only">Mail ID: sve214@gmail.com</span>
                 <input
                   type="text"
                   className="text-center border-none no-print text-sm"
                   placeholder="Company Email"
-                  defaultValue="Mail ID: agency@gmail.com"
+                  defaultValue="Mail ID: svengi214@gmail.com"
                 />
               </p>
             </div>
@@ -605,8 +613,25 @@ const InvoiceForm = () => {
                 {numberToWords(total.toFixed(2)).toUpperCase()}
               </td>
               <td className="border border-black p-1 text-right font-semibold">
-                CGST-6%
+                <span className="print:hidden">
+                  CGST-
+                  <input
+                    type="number"
+                    value={invoiceData.cgstRate}
+                    onChange={(e) =>
+                      handleTaxRateChange("cgstRate", e.target.value)
+                    }
+                    className="w-10 text-center border-b border-black inline-block mx-1"
+                    style={{ width: "2.5rem" }}
+                  />
+                  %
+                </span>
+
+                <span className="hidden print:inline">
+                  CGST- {invoiceData.cgstRate} %
+                </span>
               </td>
+
               <td className="border border-black p-1 text-right amount-column">
                 <div className="flex justify-end">
                   <span>{cgst.toFixed(2)}</span>
@@ -621,9 +646,27 @@ const InvoiceForm = () => {
               >
                 Bank Details
               </td>
+
               <td className="border border-black p-1 text-right font-semibold">
-                SGST-6%
+                <span className="print:hidden">
+                  SGST-
+                  <input
+                    type="number"
+                    value={invoiceData.sgstRate}
+                    onChange={(e) =>
+                      handleTaxRateChange("sgstRate", e.target.value)
+                    }
+                    className="w-10 text-center border-b border-black inline-block mx-1"
+                    style={{ width: "2.5rem" }}
+                  />
+                  %
+                </span>
+
+                <span className="hidden print:inline">
+                  SGST- {invoiceData.sgstRate} %
+                </span>
               </td>
+
               <td className="border border-black p-1 text-right amount-column">
                 <div className="flex justify-end">
                   <span>{sgst.toFixed(2)}</span>
