@@ -1,0 +1,267 @@
+@media print {
+  /* Basic Print Settings */
+  @page {
+    size: A4;
+    margin: 1cm;
+    @bottom-right {
+      content: counter(page);
+    }
+  }
+
+  @media print {
+    thead tr {
+      display: table-row !important;
+    }
+    thead th {
+      display: table-cell !important;
+    }
+    textarea {
+      resize: none !important;
+      overflow: hidden !important;
+    }
+  }
+
+  /* Page number container */
+  .page-number {
+    position: fixed;
+    bottom: 0.5cm;
+    right: 0.5cm;
+    font-size: 8pt;
+    color: #000 !important;
+  }
+
+  .page-number:after {
+    content: counter(page);
+  }
+
+  .no-print,
+  .invoice-table col:last-child {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 10px !important;
+    line-height: 1.2 !important;
+    background-color: white !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .invoice-container {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border: 1px solid #000 !important;
+    padding: 0 !important;
+    font-family: Arial, sans-serif !important;
+  }
+
+  /* Ensure Table Pagination Works Correctly */
+  table {
+    table-layout: fixed !important;
+    width: 100% !important;
+    border-collapse: collapse !important;
+  }
+
+  /* Force table rows to break naturally across pages */
+  tr,
+  td,
+  th {
+    page-break-inside: auto !important;
+  }
+
+  /* Headers repeat on each page */
+  thead {
+    display: table-header-group !important;
+  }
+
+  /* Make sure table content flows correctly */
+  tbody {
+    display: table-row-group !important;
+  }
+
+  /* Format table cells */
+  .invoice-table td,
+  .invoice-table th {
+    border: 1px solid #000 !important;
+    padding: 3px !important;
+    vertical-align: middle !important;
+    font-size: 9px !important;
+  }
+
+  /* Allow rows to break across pages if needed */
+  .item-row {
+    page-break-inside: auto !important;
+  }
+
+  th {
+    font-weight: bold !important;
+    text-transform: uppercase !important;
+  }
+
+  .border-black-print {
+    border-color: #000 !important;
+  }
+
+  input,
+  textarea,
+  select {
+    border: none !important;
+    background: transparent !important;
+    appearance: none !important;
+    padding: 0 !important;
+    font-size: inherit !important;
+  }
+
+  .form-input,
+  .form-value {
+    border: none !important;
+    background: none !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  /* Format invoice header text */
+  .invoice-title {
+    font-size: 14px !important;
+    font-weight: bold !important;
+    padding: 2px !important;
+  }
+
+  /* Make sure all borders print */
+  .border-black {
+    border-color: #000 !important;
+  }
+
+  /* Give more space for the items */
+  .item-row td {
+    padding: 2px !important;
+    line-height: 1.1 !important;
+  }
+
+  /* Company name should be larger */
+  .company-name {
+    font-size: 20px !important;
+    font-weight: bold !important;
+  }
+
+  /* Format signature area */
+  .signature-area {
+    height: 60px !important;
+  }
+
+  /* Remove any box-shadow */
+  * {
+    box-shadow: none !important;
+  }
+
+  /* Format amount columns to be more compact */
+  .amount-column {
+    width: 60px !important;
+    text-align: right !important;
+  }
+
+  /* Format invoice details section */
+  .invoice-details td {
+    padding: 1px 2px !important;
+    font-size: 9px !important;
+  }
+
+  /* Format customer details section */
+  .customer-details td {
+    padding: 2px !important;
+  }
+
+  /* Format gst line */
+  .gst-line td {
+    padding: 2px 4px !important;
+  }
+
+  /* Reduce cell padding in totals section */
+  .totals-row td {
+    padding: 2px 4px !important;
+  }
+
+  /* Address padding */
+  .company-address {
+    padding: 1px !important;
+    line-height: 1.1 !important;
+  }
+
+  /* Adjust description text */
+  .item-description {
+    font-size: 9px !important;
+  }
+
+  /* Control totals section to only appear at the end */
+  .totals-section {
+    page-break-inside: avoid !important;
+  }
+
+  /* Force page break before totals table */
+  .summary-table {
+    break-before: avoid !important;
+    page-break-before: avoid !important;
+  }
+}
+
+.print-only {
+  display: none;
+}
+
+.table-fixed {
+  table-layout: fixed;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+input,
+textarea {
+  padding: 0.25rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.125rem;
+}
+
+.invoice-container {
+  max-width: 210mm;
+}
+
+/* Add some padding to table cells */
+.invoice-table td,
+.invoice-table th {
+  padding: 0.5rem;
+}
+
+/* Style for invoice rows */
+.item-row td {
+  padding: 0.5rem 0.25rem;
+}
+
+/* Better spacing for the header areas */
+.header-cell {
+  padding: 0.75rem;
+}
+
+/* Prevent number input spinners */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
