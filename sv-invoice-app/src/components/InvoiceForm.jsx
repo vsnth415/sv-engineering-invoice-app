@@ -333,11 +333,12 @@ const InvoiceForm = () => {
                     }
                   />
                   <span className="font-semibold px-1 whitespace-nowrap">
-                    Date
+                    Date:
                   </span>
+
                   <input
                     type="text"
-                    className="w-20 text-sm"
+                    className="w-20 text-sm placeholder:print:opacity-0"
                     placeholder="DD-MM-YYYY"
                     value={invoiceData.invoiceDetails.date}
                     onChange={(e) =>
@@ -378,11 +379,12 @@ const InvoiceForm = () => {
                     }
                   />
                   <span className="font-semibold px-1 whitespace-nowrap">
-                    Date
+                    Date:
                   </span>
+
                   <input
                     type="text"
-                    className="w-20 text-sm"
+                    className="w-20 text-sm placeholder:print:opacity-0"
                     placeholder="DD-MM-YYYY"
                     value={invoiceData.invoiceDetails.dcDate}
                     onChange={(e) =>
@@ -418,11 +420,11 @@ const InvoiceForm = () => {
                     }
                   />
                   <span className="font-semibold px-1 whitespace-nowrap">
-                    Date
+                    Date:
                   </span>
                   <input
                     type="text"
-                    className="w-20 text-sm"
+                    className="w-20 text-sm placeholder:print:opacity-0"
                     placeholder="DD-MM-YYYY"
                     value={invoiceData.invoiceDetails.poDate}
                     onChange={(e) =>
@@ -652,6 +654,7 @@ const InvoiceForm = () => {
                   SGST-
                   <input
                     type="number"
+                    defaultValue="6"
                     value={invoiceData.sgstRate}
                     onChange={(e) =>
                       handleTaxRateChange("sgstRate", e.target.value)
@@ -661,7 +664,6 @@ const InvoiceForm = () => {
                   />
                   %
                 </span>
-
                 <span className="hidden print:inline">
                   SGST- {invoiceData.sgstRate} %
                 </span>

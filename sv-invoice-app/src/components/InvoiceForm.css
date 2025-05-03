@@ -19,6 +19,9 @@
       resize: none !important;
       overflow: hidden !important;
     }
+    input::placeholder {
+      opacity: 0 !important;
+    }
   }
 
   /* Page number container */
