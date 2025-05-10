@@ -1,3 +1,4 @@
+// Number to Words (with Paise)
 export const numberToWords = (amount) => {
   const a = [
     "",
@@ -37,9 +38,9 @@ export const numberToWords = (amount) => {
   if (isNaN(amount)) return "Invalid amount";
 
   const number = parseFloat(amount).toFixed(2);
-  const [rupeesPart, paisePart] = number.split(".");
+  const [rupeesPart, paisePartRaw] = number.split(".");
   const rupees = parseInt(rupeesPart, 10);
-  const paise = parseInt(paisePart.padEnd(2, "0"), 10); // Ensure 2-digit paise
+  const paise = parseInt(paisePartRaw.padEnd(2, "0").slice(0, 2), 10);
 
   const convert = (num) => {
     if (num === 0) return "Zero";
@@ -47,6 +48,7 @@ export const numberToWords = (amount) => {
     const n = ("000000000" + num)
       .slice(-9)
       .match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
+
     if (!n) return "";
 
     let str = "";
