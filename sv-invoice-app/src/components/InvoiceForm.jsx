@@ -102,7 +102,7 @@ const defaultInvoice = {
     ifsc: "IDBI9879879",
     bankName: "INDIAN BANK",
   },
-  companyGST: "",
+  companyGST: "29BLGPV7197F1ZA",
   cgstRate: 6,
   sgstRate: 6,
 };
@@ -175,6 +175,13 @@ const InvoiceForm = () => {
     setInvoiceData((prev) => ({
       ...prev,
       bankDetails: { ...prev.bankDetails, [field]: value },
+    }));
+
+  // Handle Company GST Details
+  const handleGstChange = (field, value) =>
+    setInvoiceData((prev) => ({
+      ...prev,
+      [field]: value,
     }));
 
   // Calculate Totals
@@ -273,17 +280,17 @@ const InvoiceForm = () => {
               </p>
               <p className="font-medium mb-0.5">
                 <span className="print-only">
-                  Bangalore -560091 mob: 9786876878
+                  Bangalore -560091 mob: 9535332599
                 </span>
                 <textarea
                   rows={1}
                   className="w-full text-center border-none no-print resize-none text-sm"
                   placeholder="Company Address Line 2"
-                  defaultValue="Bangalore -560091 mob: 9786876878"
+                  defaultValue="Bangalore -560091 mob: 9535332599"
                 />
               </p>
               <p className="font-medium mb-0">
-                <span className="print-only">Mail ID: sve214@gmail.com</span>
+                <span className="print-only">Mail ID: svengi214@gmail.com</span>
                 <input
                   type="text"
                   className="text-center border-none no-print text-sm"
@@ -454,9 +461,7 @@ const InvoiceForm = () => {
               type="text"
               className="w-1/2"
               value={invoiceData.companyGST}
-              onChange={(e) =>
-                setInvoiceData({ ...invoiceData, companyGST: e.target.value })
-              }
+              onChange={(e) => handleGstChange("companyGST", e.target.value)}
             />
           </div>
         </div>
@@ -654,7 +659,6 @@ const InvoiceForm = () => {
                   SGST-
                   <input
                     type="number"
-                    defaultValue="6"
                     value={invoiceData.sgstRate}
                     onChange={(e) =>
                       handleTaxRateChange("sgstRate", e.target.value)
